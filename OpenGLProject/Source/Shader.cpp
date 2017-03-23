@@ -5,21 +5,42 @@
 Shader::Shader(const std::string& fileName) {
 
 	program = glCreateProgram();
-	shaders[0] = CreateShader(fileName,0);
+	shaders[0] = CreateShader(LoadShader(fileName + ".vs"), GL_VERTEX_SHADER);
+	shaders[1] = CreateShader(LoadShader(fileName + ".fs"), GL_FRAGMENT_SHADER);
+
+	for (int i = 0; i < NUM_SHADERS; i++) {
+		glAttachShader(program, shaders[i]);	//Attach Shaders to Program
+	}
+
+	glBindAttribLocation(program, 0, "position");	//Hand over the Attribut 0 to Shader variable position
+
+	glLinkProgram(program);
+	CheckShaderError(program, GL_LINK_STATUS, true, "Error: Program failed to link: ");
+
+	glValidateProgram(program);
+	CheckShaderError(program, GL_VALIDATE_STATUS, true, "Error: Program is invalid: ");
 }
 
-GLuint Shader::CreateShader(const std::string& text, unsigned int type) {
-	GLuint shader = glCreateShader(type);
+Shader::~Shader() {
+	for (int i = 0; i < NUM_SHADERS; i++) {
+		glDetachShader(program, shaders[i]);
+		glDeleteShader(shaders[i]);
+	}
+	glDeleteProgram(program);
+}
+
+GLuint Shader::CreateShader(const std::string& text, GLenum shaderType) {
+	GLuint shader = glCreateShader(shaderType);
 
 	if (shader == 0)
-		std::cerr << "Error compiling shader type " << type << std::endl;
+		std::cerr << "Error compiling shader type " << shaderType << std::endl;
 
-	const GLchar* p[1];
-	p[0] = text.c_str();
-	GLint lengths[1];
-	lengths[0] = text.length();
+	const GLchar* shaderSourceStrings[1]; //Just set to 1...
+	shaderSourceStrings[0] = text.c_str();
+	GLint shaderSourceStringsLengths[1];
+	shaderSourceStringsLengths[0] = text.length();
 
-	glShaderSource(shader, 1, p, lengths);
+	glShaderSource(shader, 1, shaderSourceStrings, shaderSourceStringsLengths);
 	glCompileShader(shader);
 
 	CheckShaderError(shader, GL_COMPILE_STATUS, false, "Error compiling shader!");
@@ -51,6 +72,10 @@ std::string Shader::LoadShader(const std::string& fileName)
 	return output;
 }
 
+void Shader::Bind() {
+	glUseProgram(program);
+}
+
 void Shader::CheckShaderError(GLuint shader, GLuint flag, bool isProgram, const std::string& errorMessage)
 {
 	GLint success = 0;
@@ -70,11 +95,4 @@ void Shader::CheckShaderError(GLuint shader, GLuint flag, bool isProgram, const 
 
 		std::cerr << errorMessage << ": '" << error << "'" << std::endl;
 	}
-}
-void Shader::Bind() {
-
-}
-
-Shader::~Shader() {
-	glDeleteProgram(program);
 }
