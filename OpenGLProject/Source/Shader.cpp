@@ -13,12 +13,16 @@ Shader::Shader(const std::string& fileName) {
 	}
 
 	glBindAttribLocation(program, 0, "position");	//Hand over the Attribut 0 to Shader variable position
+	glBindAttribLocation(program, 1, "uv");	//Hand over the Attribut 0 to Shader variable position
 
 	glLinkProgram(program);
 	CheckShaderError(program, GL_LINK_STATUS, true, "Error: Program failed to link: ");
 
 	glValidateProgram(program);
 	CheckShaderError(program, GL_VALIDATE_STATUS, true, "Error: Program is invalid: ");
+
+	uniforms[TRANSFORM_U] = glGetUniformLocation(program, "transform");	//Send Matrix to transform variable in Shader
+
 }
 
 Shader::~Shader() {
@@ -70,6 +74,11 @@ std::string Shader::LoadShader(const std::string& fileName)
 	}
 
 	return output;
+}
+
+void Shader::Update(const Transform& transform) {
+	glm::mat4 transformationMatrix = transform.GetTransformation();
+	glUniformMatrix4fv(uniforms[TRANSFORM_U], 1, GL_FALSE, &transformationMatrix[0][0]);
 }
 
 void Shader::Bind() {
