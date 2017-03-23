@@ -2,8 +2,7 @@
 #include <GL/glew.h>
 #include <iostream>
 
-Display::Display(int width, int height, const std::string& title)
-{
+Display::Display(int width, int height, const std::string& title) {
 	//Define here because not needed anywhere elese
 	SDL_Init(SDL_INIT_EVERYTHING);
 
@@ -19,18 +18,18 @@ Display::Display(int width, int height, const std::string& title)
 	glContext = SDL_GL_CreateContext(window);	//GPU takes Control of Window
 
 	GLenum status = glewInit();
-	if (status != GLEW_OK)
-	{
+	if (status != GLEW_OK) {
 		std::cerr << "Glew failed to initialize!" << std::endl;
 	}
+
 	isClosed = false;
+
 	//glEnable(GL_DEPTH_TEST);
 	//glEnable(GL_CULL_FACE);
 	//glCullFace(GL_BACK);
 }
 
-Display::~Display()
-{
+Display::~Display() {
 	SDL_GL_DeleteContext(glContext);
 	SDL_DestroyWindow(window);
 	SDL_Quit();
@@ -40,14 +39,12 @@ bool Display::getIsClosed() {
 	return isClosed;
 }
 
-void Display::Clear(float r, float g, float b, float a)
-{
+void Display::Clear(float r, float g, float b, float a) {
 	glClearColor(r, g, b, a);
 	glClear(GL_COLOR_BUFFER_BIT);
 }
 
-void Display::Update()
-{
+void Display::Update() {
 	SDL_GL_SwapWindow(window);
 
 	SDL_Event e;

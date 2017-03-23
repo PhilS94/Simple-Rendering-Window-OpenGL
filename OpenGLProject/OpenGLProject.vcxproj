@@ -20,10 +20,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Header\display.h" />
+    <ClInclude Include="Header\mesh.h" />
+    <ClInclude Include="Header\Shader.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\display.cpp" />
     <ClCompile Include="Source\main.cpp" />
+    <ClCompile Include="Source\mesh.cpp" />
+    <ClCompile Include="Source\Shader.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{19AA2664-EA19-482A-9CF3-A98B491CFC6D}</ProjectGuid>
@@ -101,7 +105,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>.\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glew32.lib;glew32s.lib;SDL2.lib;SDL2main.lib;SDL2test.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glew32.lib;opengl32.lib;glu32.lib;SDL2.lib;SDL2main.lib;SDL2test.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <ProjectReference>
       <LinkLibraryDependencies>false</LinkLibraryDependencies>
