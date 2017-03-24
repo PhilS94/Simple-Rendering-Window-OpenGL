@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Header\camera.h" />
     <ClInclude Include="Header\display.h" />
     <ClInclude Include="Header\mesh.h" />
     <ClInclude Include="Header\Shader.h" />
@@ -27,6 +28,7 @@
     <ClInclude Include="Header\transform.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Source\camera.cpp" />
     <ClCompile Include="Source\display.cpp" />
     <ClCompile Include="Source\main.cpp" />
     <ClCompile Include="Source\mesh.cpp" />

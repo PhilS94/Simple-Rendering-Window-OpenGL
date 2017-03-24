@@ -76,9 +76,10 @@ std::string Shader::LoadShader(const std::string& fileName)
 	return output;
 }
 
-void Shader::Update(const Transform& transform) {
+void Shader::Update(const Transform& transform, Camera& cam) {
 	glm::mat4 transformationMatrix = transform.GetTransformation();
-	glUniformMatrix4fv(uniforms[TRANSFORM_U], 1, GL_FALSE, &transformationMatrix[0][0]);
+	glm::mat4 modelMatrix = cam.calculateViewMatrix()* transformationMatrix;
+	glUniformMatrix4fv(uniforms[TRANSFORM_U], 1, GL_FALSE, &modelMatrix[0][0]);
 }
 
 void Shader::Bind() {

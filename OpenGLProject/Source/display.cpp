@@ -2,7 +2,7 @@
 #include <GL/glew.h>
 #include <iostream>
 
-Display::Display(int width, int height, const std::string& title) {
+Display::Display(int width, int heigth, const std::string& title) {
 	//Define here because not needed anywhere elese
 	SDL_Init(SDL_INIT_EVERYTHING);
 
@@ -14,7 +14,9 @@ Display::Display(int width, int height, const std::string& title) {
 	SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 16);
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 
-	window = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_OPENGL);
+	this->width = width;
+	this->heigth = heigth;
+	window = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, heigth, SDL_WINDOW_OPENGL);
 	glContext = SDL_GL_CreateContext(window);	//GPU takes Control of Window
 
 	GLenum status = glewInit();

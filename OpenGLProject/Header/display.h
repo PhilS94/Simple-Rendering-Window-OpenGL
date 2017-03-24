@@ -10,11 +10,15 @@ public:
 	virtual ~Display();
 	void Update();
 	bool getIsClosed();
+	int getWidth() { return width; };
+	int getHeigth() { return heigth; };
 	void Clear(float r, float g, float b, float a);
 private:
 	Display(const Display& other) {}
 	void operator=(const Display& other) {} //Erstmal return void
 
+	int width;
+	int heigth;
 	SDL_Window* window;
 	SDL_GLContext glContext;
 	bool isClosed;
