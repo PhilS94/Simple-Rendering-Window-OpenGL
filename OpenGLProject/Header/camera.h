@@ -13,11 +13,12 @@ public:
 	glm::vec3 getForward() { return forward; }
 	glm::vec3 getUp() { return up; }
 	glm::vec3 getRight() { return glm::cross(up, forward); }
+	glm::mat4 getProjectionMatrix() { return projectionMatrix; }
 	//Setter
 	void setPosition(glm::vec3 pos) { this->position = pos; }
 	void setForward(glm::vec3 forward) { this->forward = forward; }
 	void setUp(glm::vec3 up) { this->up = forward; }
-	glm::mat4 calculateViewMatrix();
+	glm::mat4 calculateViewProjectionMatrix();
 private:
 	float aspect;
 	float fov;
@@ -26,6 +27,6 @@ private:
 	glm::vec3 position;
 	glm::vec3 forward;
 	glm::vec3 up;
-	glm::mat4 perspectiveMatrix;
+	glm::mat4 projectionMatrix;
 };
 #endif // ! CAMERA_H

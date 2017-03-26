@@ -22,6 +22,7 @@
     <ClInclude Include="Header\camera.h" />
     <ClInclude Include="Header\display.h" />
     <ClInclude Include="Header\mesh.h" />
+    <ClInclude Include="Header\obj_loader.h" />
     <ClInclude Include="Header\Shader.h" />
     <ClInclude Include="Header\stb_image.h" />
     <ClInclude Include="Header\texture.h" />
@@ -32,10 +33,15 @@
     <ClCompile Include="Source\display.cpp" />
     <ClCompile Include="Source\main.cpp" />
     <ClCompile Include="Source\mesh.cpp" />
+    <ClCompile Include="Source\obj_loader.cpp" />
     <ClCompile Include="Source\Shader.cpp" />
     <ClCompile Include="Source\stb_image.c" />
     <ClCompile Include="Source\texture.cpp" />
     <ClCompile Include="Source\transform.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\data\shaders\basicShader.fs" />
+    <None Include="..\data\shaders\basicShader.vs" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{19AA2664-EA19-482A-9CF3-A98B491CFC6D}</ProjectGuid>

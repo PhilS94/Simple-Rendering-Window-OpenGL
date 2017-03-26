@@ -36,6 +36,9 @@
     <ClInclude Include="Header\camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Header\obj_loader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\display.cpp">
@@ -62,5 +65,16 @@
     <ClCompile Include="Source\camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\obj_loader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\data\shaders\basicShader.fs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\data\shaders\basicShader.vs">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

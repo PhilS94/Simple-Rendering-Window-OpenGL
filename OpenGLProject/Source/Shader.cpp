@@ -13,7 +13,8 @@ Shader::Shader(const std::string& fileName) {
 	}
 
 	glBindAttribLocation(program, 0, "position");	//Hand over the Attribut 0 to Shader variable position
-	glBindAttribLocation(program, 1, "uv");	//Hand over the Attribut 0 to Shader variable position
+	glBindAttribLocation(program, 1, "uv");			//Hand over the Attribut 1 to Shader variable uv
+	glBindAttribLocation(program, 2, "normal");		//Hand over the Attribut 2 to Shader variable normal
 
 	glLinkProgram(program);
 	CheckShaderError(program, GL_LINK_STATUS, true, "Error: Program failed to link: ");
@@ -78,8 +79,8 @@ std::string Shader::LoadShader(const std::string& fileName)
 
 void Shader::Update(const Transform& transform, Camera& cam) {
 	glm::mat4 transformationMatrix = transform.GetTransformation();
-	glm::mat4 modelMatrix = cam.calculateViewMatrix()* transformationMatrix;
-	glUniformMatrix4fv(uniforms[TRANSFORM_U], 1, GL_FALSE, &modelMatrix[0][0]);
+	glm::mat4 MVPMatrix = cam.calculateViewProjectionMatrix()* transformationMatrix;
+	glUniformMatrix4fv(uniforms[TRANSFORM_U], 1, GL_FALSE, &MVPMatrix[0][0]);
 }
 
 void Shader::Bind() {

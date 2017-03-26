@@ -20,8 +20,7 @@ private:
 	static const unsigned int NUM_SHADERS =2; // Vertex and Shader Fragment Shader only
 	
 	enum{
-		TRANSFORM_U,
-		
+		TRANSFORM_U,	
 		NUM_UNIFORMS
 	};
 	GLuint program; //Shader program (Keep track of where program is)
