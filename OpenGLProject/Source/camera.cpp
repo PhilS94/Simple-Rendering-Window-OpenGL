@@ -17,7 +17,11 @@ Camera::~Camera() {
 
 }
 
-glm::mat4 Camera::calculateViewProjectionMatrix() {
+glm::mat4 Camera::calculateViewMatrix() {
 	glm::mat4 viewMatrix = glm::lookAt(position, position + forward, up);
-	return projectionMatrix * viewMatrix;
+	return viewMatrix;
+}
+
+glm::mat4 Camera::calculateViewProjectionMatrix() {
+	return projectionMatrix * calculateViewMatrix();
 }

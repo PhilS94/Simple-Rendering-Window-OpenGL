@@ -6,8 +6,13 @@
 
 class Transform {
 public:
-	Transform(const glm::vec3& pos = glm::vec3(), const glm::vec4& rot = glm::vec4(), const glm::vec3& scale = glm::vec3(1.0f, 1.0f, 1.0f));
-	virtual ~Transform();
+	Transform(const glm::vec3& pos = glm::vec3(), const glm::vec3& rot = glm::vec3(), const glm::vec3& scale = glm::vec3(1.0f, 1.0f, 1.0f)) {
+		this->pos = pos;
+		this->rot = rot;
+		this->scale = scale;
+	}
+
+	//~Transform();
 
 	glm::mat4 GetTransformation() const {
 		glm::mat4 translateMatrix = glm::translate(pos);
@@ -26,9 +31,10 @@ public:
 	glm::vec3& getScale() { return scale; };
 
 	//Setter
-	void getPosition(glm::vec3& pos) { this->pos = pos; };
-	void getRotation(glm::vec3& rot) { this->rot = rot; };
-	void getScale(glm::vec3& scale) { this->scale = scale; };
+	void setPosition(glm::vec3& pos) { this->pos = pos; };
+	void setRotation(glm::vec3& rot) { this->rot = rot; };
+	void setScale(glm::vec3& scale) { this->scale = scale; };
+
 private:
 	glm::vec3 pos;
 	glm::vec3 rot;

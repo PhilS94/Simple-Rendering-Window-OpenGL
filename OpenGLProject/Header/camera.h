@@ -18,6 +18,7 @@ public:
 	void setPosition(glm::vec3 pos) { this->position = pos; }
 	void setForward(glm::vec3 forward) { this->forward = forward; }
 	void setUp(glm::vec3 up) { this->up = forward; }
+	glm::mat4 calculateViewMatrix();
 	glm::mat4 calculateViewProjectionMatrix();
 private:
 	float aspect;

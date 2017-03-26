@@ -12,6 +12,7 @@ public:
 	bool getIsClosed();
 	int getWidth() { return width; };
 	int getHeigth() { return heigth; };
+	SDL_Window* getWindow() { return window;}
 	void Clear(float r, float g, float b, float a);
 private:
 	Display(const Display& other) {}

@@ -5,7 +5,6 @@
 #include "texture.h"
 #include "transform.h"
 #include "camera.h"
-#include <glm/glm.hpp>
 
 int main(int argc, char** argv) {
 	Display display(800, 600, "OpenGl Project Testdisplay");
@@ -27,12 +26,12 @@ int main(int argc, char** argv) {
 	float aspect = float(display.getWidth()) / float(display.getHeigth());
 	std::cout << "Display dimensions are " << display.getWidth() << " x " << display.getHeigth() << ", thus resultung aspect: " << aspect << "." << std::endl;
 
-	Camera cam(glm::vec3(0, 0, -4), aspect, 70.0f, 0.1f, 100.0f);
+	Camera cam(glm::vec3(0, 0, -20), aspect, 70.0f, 0.1f, 100.0f);
 	//Mesh mesh(triangle, sizeof(triangle) / sizeof(triangle[0]), indices, sizeof(indices) / sizeof(indices[0]));
 	Mesh mesh("./../data/obj/securitycam.obj");
 	Shader shader("./../data/shaders/basicShader");
 	Texture texture("./../data/textures/metal.jpg");
-	Transform transform(glm::vec3(0, 0, 0), glm::vec4(0, 1, 1, 0), glm::vec3(1, 1, 1));;
+	Transform transform(glm::vec3(0, 0, 0), glm::vec4(0, 0, 0, 0), glm::vec3(1, 1, 1));;
 
 	float time = 0.0f;
 
@@ -47,11 +46,12 @@ int main(int argc, char** argv) {
 		GLfloat radius = 10.0f;
 		cam.setPosition(glm::vec3(sinTime * radius, 0, cosTime * radius));
 		cam.setForward(-cam.getPosition());
-		//transform.getPosition().x = sinTime;
-		//ransform.getPosition().y = sinTime;
-		//transform.getPosition().z = sinTime;
-		//transform.getRotation().z = 0.5f*time;
-		//transform.getRotation().y = 0.2f*time;
+
+		//Test Mouseinput
+		//int xpos, ypos;
+		//SDL_GetMouseState(&xpos, &ypos);
+		//transform.setRotation(transform.getRotation() + glm::vec3((float)ypos / 100000.0, (float)xpos / 100000.0, 0));
+		//SDL_WarpMouseInWindow(display.getWindow(), display.getWidth() / 2, display.getHeigth() / 2);
 
 		shader.Bind();
 		texture.Bind(0);
