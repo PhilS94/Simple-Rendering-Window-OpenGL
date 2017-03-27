@@ -4,11 +4,12 @@
 #include <glm/glm.hpp>
 #include <GL/glew.h>
 #include "obj_loader.h"
+#include "transform.h"
 #include <vector>
 
 class Vertex {
 public:
-	Vertex::Vertex(const glm::vec3& pos, const glm::vec2& uv, const glm::vec3& normal = glm::vec3(0,0,0)) {
+	Vertex::Vertex(const glm::vec3& pos, const glm::vec2& uv, const glm::vec3& normal = glm::vec3(0, 0, 0)) {
 		this->position = pos;
 		this->uv = uv;
 		this->normal = normal;
@@ -35,14 +36,20 @@ class Mesh {
 public:
 	Mesh(Vertex* vertices, unsigned int numberVertices, unsigned int* indices, unsigned int numIndices);
 	Mesh(const std::string& fileName);
-	void Draw();
+	Mesh(const IndexedModel model);
 	virtual ~Mesh();
+	Transform* getTransform() { return &transform; }
+	void Draw();
+	Mesh operator=(const Mesh& mesh) {
+		Mesh newMesh(mesh.model);
+		return newMesh;
+	}
 private:
 	GLuint vertexArrayObject;
 	GLuint vertexArrayBuffers[NUM_BUFFERS];
 	unsigned int drawCount;
+	Transform transform;
+	IndexedModel model;
 	void InitMesh(const IndexedModel& model);
 };
-
-
 #endif 

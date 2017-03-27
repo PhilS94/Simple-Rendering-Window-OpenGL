@@ -5,6 +5,7 @@
 #include "texture.h"
 #include "transform.h"
 #include "camera.h"
+#include "customtime.h"
 
 int main(int argc, char** argv) {
 	Display display(800, 600, "OpenGl Project Testdisplay");
@@ -31,33 +32,14 @@ int main(int argc, char** argv) {
 	Mesh mesh("./../data/obj/securitycam.obj");
 	Shader shader("./../data/shaders/basicShader");
 	Texture texture("./../data/textures/metal.jpg");
-	Transform transform(glm::vec3(0, 0, 0), glm::vec4(0, 0, 0, 0), glm::vec3(1, 1, 1));;
 
 	float time = 0.0f;
+	CustomTime customTime;
 
 	while (!display.getIsClosed()) {
+		customTime.incrementTime();
+		std::cout << customTime.getTime() << std::endl;
 		display.Clear(0.0f, 0.15f, 0.2f, 1.0f);
-
-		float amplitude = 2;
-		float velocity = 0.5f;
-		float sinTime = amplitude*sinf(velocity*time);
-		float cosTime = amplitude*cosf(velocity*time);
-
-		GLfloat radius = 10.0f;
-		cam.setPosition(glm::vec3(sinTime * radius, 0, cosTime * radius));
-		cam.setForward(-cam.getPosition());
-
-		//Test Mouseinput
-		//int xpos, ypos;
-		//SDL_GetMouseState(&xpos, &ypos);
-		//transform.setRotation(transform.getRotation() + glm::vec3((float)ypos / 100000.0, (float)xpos / 100000.0, 0));
-		//SDL_WarpMouseInWindow(display.getWindow(), display.getWidth() / 2, display.getHeigth() / 2);
-
-		shader.Bind();
-		texture.Bind(0);
-		shader.Update(transform, cam);
-		mesh.Draw();
-
 		display.Update();
 		time += 0.001f;
 	}

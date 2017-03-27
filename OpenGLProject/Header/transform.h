@@ -3,41 +3,32 @@
 
 #include <glm/glm.hpp>
 #include <glm/gtx/transform.hpp>
+#include <glm/gtx/quaternion.hpp>
+#include <glm/gtc/quaternion.hpp>
 
 class Transform {
 public:
-	Transform(const glm::vec3& pos = glm::vec3(), const glm::vec3& rot = glm::vec3(), const glm::vec3& scale = glm::vec3(1.0f, 1.0f, 1.0f)) {
-		this->pos = pos;
-		this->rot = rot;
+	Transform(const glm::vec3& pos = glm::vec3(), const glm::quat rot = glm::quat(), const glm::vec3& scale = glm::vec3(1.0f, 1.0f, 1.0f)) {
+		this->position = pos;
+		this->rotation = rot;
 		this->scale = scale;
 	}
 
 	//~Transform();
 
-	glm::mat4 GetTransformation() const {
-		glm::mat4 translateMatrix = glm::translate(pos);
-		glm::mat4 rotXMatrix = glm::rotate(rot.x, glm::vec3(1, 0, 0));
-		glm::mat4 rotYMatrix = glm::rotate(rot.y, glm::vec3(0, 1, 0));
-		glm::mat4 rotZMatrix = glm::rotate(rot.z, glm::vec3(0, 0, 1));
-		glm::mat4 scaleMatrix = glm::scale(scale);
-
-		glm::mat4 rotationMatrix = rotZMatrix *rotYMatrix*rotXMatrix;
-		return translateMatrix*rotationMatrix *scaleMatrix;
-	}
-
 	//Getter
-	glm::vec3& getPosition() { return pos; };
-	glm::vec3& getRotation() { return rot; };
+	glm::vec3& getPosition() { return position; };
+	glm::quat& getRotation() { return rotation; };
 	glm::vec3& getScale() { return scale; };
 
-	//Setter
-	void setPosition(glm::vec3& pos) { this->pos = pos; };
-	void setRotation(glm::vec3& rot) { this->rot = rot; };
-	void setScale(glm::vec3& scale) { this->scale = scale; };
+	void translate(glm::vec3 translationVector);
+	void rotate(float angle, glm::vec3 axis);
+	void scaleBy(glm::vec3 scaleVector);
+	glm::mat4 calculateTransformationMatrix();
 
 private:
-	glm::vec3 pos;
-	glm::vec3 rot;
+	glm::vec3 position;
+	glm::quat rotation;
 	glm::vec3 scale;
 };
 #endif //TRANSFORM_H

@@ -10,7 +10,7 @@ class Shader {
 public:
 	Shader(const std::string& fileName);
 	void Bind();
-	void Update(const Transform& transform, Camera& cam);
+	void Update(Transform& transform, Camera& cam);
 	std::string LoadShader(const std::string& fileName);
 	GLuint CreateShader(const std::string& text, GLenum shaderType);
 	void CheckShaderError(GLuint shader, GLuint flag, bool isProgram, const std::string& errorMessage);

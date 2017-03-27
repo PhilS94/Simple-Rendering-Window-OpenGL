@@ -2,13 +2,11 @@
 #include <vector>
 
 Mesh::Mesh(const std::string& fileName) {
-	IndexedModel model = OBJModel(fileName).ToIndexedModel();
+	model = OBJModel(fileName).ToIndexedModel();
 	InitMesh(model);
 }
 
 Mesh::Mesh(Vertex* vertices, unsigned int numVertices, unsigned int* indices, unsigned int numIndices) {
-	IndexedModel model;
-
 	for (unsigned int i = 0; i < numVertices; i++) {
 		model.positions.push_back(*vertices[i].getPosition());
 		model.texCoords.push_back(*vertices[i].getUV());
@@ -22,7 +20,12 @@ Mesh::Mesh(Vertex* vertices, unsigned int numVertices, unsigned int* indices, un
 	InitMesh(model);
 }
 
+Mesh::Mesh(const IndexedModel model) {
+	InitMesh(model);
+}
+
 void Mesh::InitMesh(const IndexedModel& model) {
+	this->transform = Transform();
 	//drawCount = numberVertices;
 	drawCount = model.indices.size();
 	glGenVertexArrays(1, &vertexArrayObject);
@@ -49,11 +52,11 @@ void Mesh::InitMesh(const IndexedModel& model) {
 	glEnableVertexAttribArray(2);	//Tell there is one Attribut as Array
 	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 0, 0); //Use 0th Attribute, skip 0 Elements in Array and start with offset 0
 
-
 	//Indices Buffer
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vertexArrayBuffers[INDEX_VB]); //Buffers Elements are references to other Buffers
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, model.indices.size() * sizeof(model.indices[0]), &model.indices[0], GL_STATIC_DRAW); //Takes data from RAM to GPU (kind of...) //GPU Data will never be changed...
 
+	//Transform
 	glBindVertexArray(0);
 	glBindVertexArray(1);
 }
