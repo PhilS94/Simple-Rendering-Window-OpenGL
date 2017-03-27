@@ -8,6 +8,7 @@
 
 class Shader {
 public:
+	Shader() { Shader("./../data/shaders/basicShader"); };
 	Shader(const std::string& fileName);
 	void Bind();
 	void Update(Transform& transform, Camera& cam);
@@ -17,10 +18,10 @@ public:
 	virtual ~Shader();
 
 private:
-	static const unsigned int NUM_SHADERS =2; // Vertex and Shader Fragment Shader only
-	
-	enum{
-		TRANSFORM_U,	
+	static const unsigned int NUM_SHADERS = 2; // Vertex and Shader Fragment Shader only
+
+	enum {
+		TRANSFORM_U,
 		NUM_UNIFORMS
 	};
 	GLuint program; //Shader program (Keep track of where program is)

@@ -6,9 +6,10 @@
 
 class Texture {
 public:
+	Texture() { Texture("./../data/textures/metal.jpg"); }
 	Texture(const std::string& fileName);
 	void Bind(unsigned int unit);
-	
+
 	virtual ~Texture();
 private:
 	GLuint texture;

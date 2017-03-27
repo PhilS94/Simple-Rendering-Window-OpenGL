@@ -3,7 +3,6 @@
 #include <iostream>
 
 Shader::Shader(const std::string& fileName) {
-
 	program = glCreateProgram();
 	shaders[0] = CreateShader(LoadShader(fileName + ".vs"), GL_VERTEX_SHADER);
 	shaders[1] = CreateShader(LoadShader(fileName + ".fs"), GL_FRAGMENT_SHADER);
@@ -77,7 +76,7 @@ std::string Shader::LoadShader(const std::string& fileName)
 	return output;
 }
 
-void Shader::Update(Transform& transform, Camera& cam) {
+void Shader::Update(Transform& transform,Camera& cam) {
 	glm::mat4 transformationMatrix = transform.calculateTransformationMatrix();
 	glm::mat4 MVPMatrix = cam.calculateViewProjectionMatrix()* transformationMatrix;
 	glUniformMatrix4fv(uniforms[TRANSFORM_U], 1, GL_FALSE, &MVPMatrix[0][0]);

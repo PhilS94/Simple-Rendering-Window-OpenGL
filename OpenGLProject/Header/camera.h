@@ -6,6 +6,7 @@
 
 class Camera {
 public:
+	Camera() { Camera(glm::vec3(0,0,0),1.33f,70.0f,0.1f,1000.0f); }
 	Camera(glm::vec3 pos, float aspect, float fov, float zNear, float zFar);
 	virtual ~Camera();
 	//Getter
@@ -21,10 +22,6 @@ public:
 	glm::mat4 calculateViewMatrix();
 	glm::mat4 calculateViewProjectionMatrix();
 private:
-	float aspect;
-	float fov;
-	float zNear;
-	float zFar;
 	glm::vec3 position;
 	glm::vec3 forward;
 	glm::vec3 up;

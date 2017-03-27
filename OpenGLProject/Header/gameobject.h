@@ -8,20 +8,21 @@
 
 class GameObject {
 public:
-	GameObject(Mesh mesh, Shader shader, Texture texture);
-	virtual ~GameObject();
+	GameObject(Mesh mesh, Shader shader, Texture texture, Camera cam);
+	//virtual ~GameObject();
 
 	//Getter
 	Transform* getTransform() { return &transform; }
-	Mesh* getMesh() { return &mesh; }
+	//Mesh* getMesh() { return &mesh; }
 	Texture* getTexture() { return &texture; }
 
-	void Update();
+	void Update(float deltaTime);
 
 private:
 	Transform transform;
 	Mesh mesh;
 	Shader shader;
 	Texture texture;
+	Camera camera;
 };
 #endif // !GAMEOBJECT_H

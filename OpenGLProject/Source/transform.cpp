@@ -18,3 +18,9 @@ void Transform::rotate(float angle, glm::vec3 axis) {
 void Transform::scaleBy(glm::vec3 scaleVector) {
 	this->scale *= scale;
 }
+
+/*
+void Transform::setLookDirection(glm::vec3 forward, glm::vec3 up) {
+	this->rotation = glm::lookAt(position,position+glm::vec3(0,0,1),glm::vec3(0,1,0)) *
+}
+*/

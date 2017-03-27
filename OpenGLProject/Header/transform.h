@@ -24,6 +24,7 @@ public:
 	void translate(glm::vec3 translationVector);
 	void rotate(float angle, glm::vec3 axis);
 	void scaleBy(glm::vec3 scaleVector);
+	//void setLookDirection(glm::vec3 forward, glm::vec3 up);
 	glm::mat4 calculateTransformationMatrix();
 
 private:

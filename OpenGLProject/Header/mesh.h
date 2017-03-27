@@ -34,6 +34,7 @@ enum MeshBufferPositions {
 
 class Mesh {
 public:
+	Mesh() { Mesh("./../data/obj/securitycam.obj"); }
 	Mesh(Vertex* vertices, unsigned int numberVertices, unsigned int* indices, unsigned int numIndices);
 	Mesh(const std::string& fileName);
 	Mesh(const IndexedModel model);

@@ -4,10 +4,6 @@
 
 Camera::Camera(glm::vec3 pos, float aspect, float fov, float zNear, float zFar) {
 	this->position = pos;
-	this->aspect = aspect;
-	this->fov = fov;
-	this->zNear = zNear;
-	this->zFar = zFar;
 	forward = glm::vec3(0, 0, 1);
 	up = glm::vec3(0, 1, 0);
 	projectionMatrix = glm::perspective(fov, aspect, zNear, zFar);
